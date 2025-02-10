@@ -1,0 +1,17 @@
+.preview .projectImage {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    outline: solid 1px pink;
+    background-position: top center;
+    background-size: cover;
+  }
+  
+.preview  {
+    margin-inline: 20px;
+    
+
+    @media (min-width: 768px) {
+      
+    }
+  }
+  
