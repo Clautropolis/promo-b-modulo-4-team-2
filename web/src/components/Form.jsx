@@ -2,7 +2,7 @@ import UploadButton from "./UploadButton"
 import '../styles/Form.scss'
 import PropTypes from 'prop-types';
 
-function Form({changeData, getFileImage, dataCard, setUrlDataCard, urlDataCard}) {
+function Form({changeData, getFileImage, dataCard, setUrlDataCard, urlDataCard, messageError, setMessageError }) {
      
         //función manejadora con id reconocemos el input con value obtenemos su valor
     const handleChangeInput = (ev) => {
@@ -11,20 +11,18 @@ function Form({changeData, getFileImage, dataCard, setUrlDataCard, urlDataCard})
         changeData(inputID, inputValue); 
     };
 
-    const checkValidInput = () => {
+    // const checkValidInput = () => {
                
-        for (const element in dataCard) {
-            if (element === '') {
-                console.log("ERROR")
-                } else {
-                console.log("EXITOOOOOO")
-                    }
-                }
-            }
+    //     for (const element in dataCard) {
+    //         if (element === '') {
+    //             console.log("ERROR")
+    //             } else {
+    //             console.log("EXITOOOOOO")
+    //                 }
+    //             }
+    //         }
             //Función funciona. Falta terminar el condicional. Sale por el else y no debería ser así. 
     
-    
-
     const handleSaveProject = (ev) => {
         ev.preventDefault()
         fetch('https://dev.adalab.es/api/projectCard', {
@@ -35,10 +33,15 @@ function Form({changeData, getFileImage, dataCard, setUrlDataCard, urlDataCard})
             }
         }).then(res=> res.json())
         .then((data) => {
-            console.log(data)
-            setUrlDataCard(data.cardURL)
+            // console.log(data)
+            if (data.success){
+                setUrlDataCard(data.cardURL)
+            } else {
+                setMessageError("❌ Hubo un problema al guardar el proyecto. Comprueba que todos los campos estén rellenos."); 
+            }
         })
-        checkValidInput()
+        
+        // checkValidInput()
     }
 
     return (
@@ -70,7 +73,7 @@ function Form({changeData, getFileImage, dataCard, setUrlDataCard, urlDataCard})
             
             <div className="create_link">
                 <button className="button--large" onClick={handleSaveProject}>Guardar proyecto</button>
-                {urlDataCard ? <a className="link_card" href={urlDataCard} target="_blank">Ver proyecto</a> : null}
+                {urlDataCard ? <a className="link_card" href={urlDataCard} target="_blank">Ver proyecto</a> : <p>{messageError}</p>}
             </div>
         </fieldset>
         
