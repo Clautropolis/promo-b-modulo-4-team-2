@@ -59,10 +59,10 @@ function Form({changeData, getFileImage, dataCard, setUrlDataCard, urlDataCard, 
                 errorsClone.job = 'Falta rellenar la profesión'
             }
         if(dataCard.photo === '') {
-                errorsClone.photo = 'Falta rellenar la imagen del autor o la autora'
+                errorsClone.photo = 'Falta subir la imagen del autor o la autora'
             }
         if(dataCard.image === '') {
-                errorsClone.image = 'Falta rellenar la imagen del proyecto'
+                errorsClone.image = 'Falta subir la imagen del proyecto'
             }
 
         setErrors(errorsClone)
@@ -106,9 +106,11 @@ function Form({changeData, getFileImage, dataCard, setUrlDataCard, urlDataCard, 
             <span className="error_message">{errors.slogan}</span>
             <div className="addForm__2col">
             <input className="addForm__input" type="url" name="repo" id="repo" placeholder="Repositorio" onChange={handleChangeInput} value={dataCard.repo}/>
-            <span className="error_message">{errors.repo}</span>
             <input className="addForm__input" type="url" name="demo" id="demo" placeholder="Demo" onChange={handleChangeInput} value={dataCard.demo}/>
-            <span className="error_message">{errors.demo}</span>
+            </div>
+            <div className="error_container">
+                <span className="error_message">{errors.repo}</span>
+                <span className="error_message">{errors.demo}</span>
             </div>         
             <input className="addForm__input" type="text" name="technologies" id="technologies" placeholder="Tecnologías" onChange={handleChangeInput} value={dataCard.technologies}/>
             <span className="error_message">{errors.technologies}</span>
@@ -129,12 +131,13 @@ function Form({changeData, getFileImage, dataCard, setUrlDataCard, urlDataCard, 
                 <UploadButton text="Subir foto del proyecto" id="image" getFileImage={getFileImage}/>
                 <UploadButton text= "Subir foto de la autora" id="photo" getFileImage={getFileImage}/>
             </div>
-            <span className="error_message">{errors.photo}</span>
-            <span className="error_message">{errors.image}</span>
-            
+            <div className="error_container">
+                <span className="error_message">{errors.photo}</span>
+                <span className="error_message">{errors.image}</span>
+            </div>
             <div className="create_link">
                 <button className="button--large" onClick={handleSaveProject}>Guardar proyecto</button>
-                {urlDataCard ? <a className="link_card" href={urlDataCard} target="_blank">Ver proyecto</a> : <p>{messageError}</p>}
+                {urlDataCard ? <a className="link_card" href={urlDataCard} target="_blank">Ver proyecto</a> : <p className="general_error">{messageError}</p>}
             </div>
         </fieldset>
         
