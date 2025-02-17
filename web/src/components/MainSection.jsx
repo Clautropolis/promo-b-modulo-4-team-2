@@ -20,7 +20,9 @@ MainSection.propTypes = {
     changeData : PropTypes.func,
     getFileImage: PropTypes.func,
     setUrlDataCard: PropTypes.func,
-    urlDataCard: PropTypes.string
+    urlDataCard: PropTypes.string,
+    messageError : PropTypes.string,
+    setMessageError : PropTypes.func
 };
 
 export default MainSection

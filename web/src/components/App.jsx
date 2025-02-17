@@ -5,6 +5,8 @@ import MainSection from "./MainSection";
 import Footer from "./Footer";
 import { Route, Routes } from "react-router-dom";
 import Landing from "./Landing";
+import Api from "../services/api.js";
+import { useEffect } from "react";
 
 function App() {
 
@@ -24,7 +26,8 @@ function App() {
   } 
 );
   const [urlDataCard, setUrlDataCard] = useState ('');
-  const [messageError, setMessageError] = useState ('')
+  const [messageError, setMessageError] = useState ('');
+  const [listProjects, setListProjects] = useState([]);
   
 //asignar valor a la variable para renderizar en el preview con set
   const changeData = (key, value) => {
@@ -35,13 +38,18 @@ function App() {
     setDataCard({...dataCard, [id]: urlImage})
   }
 
+//petición a la API
+useEffect (()=>{
+  Api().then(data => setListProjects(data.data))
+}, [])
+
   return (
 <>
 <div className="container">
 
   <Header />
   <Routes>
-    <Route path="/landing" element={<Landing dataCard={dataCard}/> }/>
+    <Route path="/landing" element={<Landing dataCard={dataCard} listProjects ={listProjects} setListProjects={setListProjects}/> }/>
 
     <Route path="/" element={<MainSection dataCard={dataCard} changeData={changeData} getFileImage={getFileImage} setUrlDataCard={setUrlDataCard} urlDataCard={urlDataCard} messageError={messageError} setMessageError={setMessageError}/>}/>
 
