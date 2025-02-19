@@ -1,6 +1,7 @@
 //IMPORTS 
 const express = require("express");
 const cors = require("cors");
+const mysql = require("mysql2/promise");
 
 //CREAR SERVIDOR 
 const server = express();
@@ -36,13 +37,86 @@ const proyects = [
   }
 ];
 
-//ENDPOINT
-server.get("/projects/list", (req, res)=>{
-  res.status(200).json({
-    succes : true,
-    data : proyects
+async function connectBD() {
+  const conex = await mysql.createConnection({  //esta funcion me devuelve una promesa, por eso se le pone await 
+      host: "sql.freedb.tech",
+      user: "freedb_adminMel", 
+      password: "uZd8??B6C5g4YEM",
+      database: "freedb_firstProject2025",
   });
+  conex.connect();
+  return conex;   
+}
+
+
+//ENDPOINT
+server.get("/projects/list", async (req, res)=>{
+
+  try {
+
+    const connection = await connectBD();
+    const sqlSelect = "SELECT Projects.name, Projects.slogan, Projects.repo, Projects.demo, Projects.technologies, Projects.description AS `desc`, Projects.image, Projects.fk_author, Authors.name AS autor, Authors.job, Authors.photo   FROM Projects INNER JOIN Authors ON Projects.fk_author = Authors.idAuthor";
+    const [result] = await connection.query(sqlSelect);
+    connection.end();
+
+    if(result.length === 0){
+      res.status (404).json({
+        success : false,
+        data: "No se encontró ningún proyecto"
+      });
+    }else{
+
+      res.status(200).json({
+      success : true,
+      data : result
+      });
+    }
+
+  } catch (error) {
+    res.status(500).json({
+      success : false,
+      data : error
+    });
+  }
+  
 });
+
+//ENDPOINT POST
+server.post("/project/add", async(req, res) => {
+  try {
+    const project = req.body;
+    const connection = await connectBD();
+    const insertAutor = "INSERT INTO Authors (name, job, photo) VALUES (?, ?, ?)";
+    const insertProject = "INSERT INTO Projects (name, slogan, repo, demo, technologies, description, image, fk_author) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+
+    const [resultAutor] = await connection.query(insertAutor, [project.autor, project.job, project.photo]);
+    const [resultProject] = await connection.query(insertProject, [project.name, project.slogan, project.repo, project.demo, project.technologies, project.desc, project.image, resultAutor.insertId]);
+
+    connection.end();
+
+    if(resultProject.length === 0 && resultAutor.length === 0){
+      res.status (404).json({
+          success: false,
+          data: "No se ha añadido ningún dato a la base de datos"
+      });
+    }else{
+
+      res.status(200).json({
+      success : true,
+      data : "Proyecto creado con éxito"
+      //Aquí el servidor me devuelve una url que es la que nos lleva a la preview, pero todavia no funciona. Eso mañana.
+      //urlDataCard : `http://localhost:5005/${resultProject.insertId}
+      
+      });
+    }
+
+  } catch (error) {
+    res.status(500).json({
+      success : false,
+      data : error
+    });
+  }
+})
 
 //PUERTO
 const PORT = 5005;

@@ -74,7 +74,7 @@ function Form({changeData, getFileImage, dataCard, setUrlDataCard, urlDataCard, 
         ev.preventDefault()
         checkValidInput()
 
-        fetch('https://dev.adalab.es/api/projectCard', {
+        fetch('http://localhost:5005/project/add', {
             body: JSON.stringify(dataCard),
             method: 'POST',
             headers: {
