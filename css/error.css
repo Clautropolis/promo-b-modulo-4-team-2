@@ -1,0 +1,110 @@
+@import url('https://fonts.googleapis.com/css?family=Black+Han+Sans|Oswald');
+
+body {
+	margin: 20px 0px 20px 0px;
+	height: auto;
+	width: 100vw;
+	display: flex;
+	flex-flow: column;
+	align-items: center;
+	justify-content: center;
+	background-color: #202020;
+	color: white;
+	overflow-y: scroll;
+}
+
+p, h1, svg {
+	text-align: center;
+	margin: 20px;
+}
+
+h1 {
+	font-size: 5em; 
+	font-family: 'Black Han Sans', sans-serif;
+	letter-spacing: 5px; 
+}
+
+p {
+	font-family: 'Oswald', sans-serif;
+	font-size: 1.5em;
+}
+
+button {
+	padding: 15px 10px 15px 10px;
+	background-color: #FB7C04;
+	border: 0px; 
+	border-radius: 2px;
+	font-family: 'Oswald', sans-serif;
+	font-size: 1em;
+	cursor: pointer;
+	transition: 0.8s;
+	outline: none;
+} 
+
+button:hover {
+	background-color: #FBBB04; 
+}
+
+@media (max-width: 580px) {
+	body {
+		height: 100vh; 
+		margin: 0px;
+	}
+	
+	h1 {
+		font-size: 4em;
+		margin: 0px;
+	}
+	p {
+		font-size: 1em;
+		margin-top: 0px; 
+	}
+	svg {
+		width: 75%;
+		margin: 0px; 
+	}
+	button {
+		padding: 10px; 
+	}
+}
+
+@media (min-width: 980px) {
+	p {
+		margin: 20px 150px 20px 150px;
+		font-size: 2em;
+	}	
+	svg {
+		width: 110%;
+		height: 110%;
+	}
+}
+
+svg {
+	animation-name: test;
+	animation-duration: 1s;
+	animation-delay: 0.8s;
+}
+
+@keyframes test {
+	0% {
+		transform: rotate(0deg);
+	}
+	50% {
+		transform: rotate(10deg);
+	}
+	100% {
+		transform: rotate(0deg);
+		opaxity: 1;
+	}
+}
+
+
+#path0 {
+	
+}
+
+
+@keyframes FillIn {
+  from { fill-opacity: 0; }
+  to { fill-opacity: 1; }
+}

@@ -9,6 +9,7 @@ const server = express();
 //CONFIGURAR SERVIDOR 
 server.use(cors());
 server.use(express.json());
+server.set('view engine', 'ejs');
 
 const proyects = [
   {
@@ -103,10 +104,8 @@ server.post("/project/add", async(req, res) => {
 
       res.status(200).json({
       success : true,
-      data : "Proyecto creado con éxito"
-      //Aquí el servidor me devuelve una url que es la que nos lleva a la preview, pero todavia no funciona. Eso mañana.
-      //urlDataCard : `http://localhost:5005/${resultProject.insertId}
-      
+      urlDataCard : `http://localhost:5005/detail/${resultProject.insertId}`
+      //Aquí el servidor me devuelve una url que es la que nos lleva a la preview, pero todavia no funciona. Eso mañana.   
       });
     }
 
@@ -118,6 +117,33 @@ server.post("/project/add", async(req, res) => {
   }
 })
 
+//ENDPOINT DETAIL
+server.get('/detail/:id', async (req, res) => {
+  try {
+    const connection = await connectBD();
+    const sqlSelect = `SELECT * FROM Projects INNER JOIN Authors ON Projects.fk_author = Authors.idAuthor WHERE idProject = ${req.params.id}`
+
+    // const sqlSelect = "SELECT Projects.name, Projects.slogan, Projects.repo, Projects.demo, Projects.technologies, Projects.description AS `desc`, Projects.image, Projects.fk_author, Authors.name AS autor, Authors.job, Authors.photo   FROM Projects ";
+    const [result] = await connection.query(sqlSelect)
+    connection.end();
+console.log(result);
+
+    if(result.length !== 0) {
+      res.render('detail', {detailProject: result[0]})
+    } else {
+      res.render('messageError')
+    }
+      
+    
+  } catch (error) {
+    res.status(500).json({
+      success : false,
+      data : error
+    });
+  }
+})
+
+
 //PUERTO
 const PORT = 5005;
 server.listen(PORT, ()=>{
@@ -127,4 +153,4 @@ server.listen(PORT, ()=>{
 //SERVIDOR ESTÁTICOS
 const urlServerStatic = "./src/public"; //siempre empieza en la carpeta raíz
 server.use(express.static(urlServerStatic));
-
+server.use(express.static('./css'));
