@@ -3,52 +3,110 @@ body {
     color: white;
 }
 
-.hero {
-    margin-bottom: 3rem;
-  }
-  
-  @media screen and (min-width: 768px) {
-    .hero {
-      grid-column: span 2;
-    }
-  }
-  
-.hero .title {
+.hero{
+  width: 100%;
+  height: 30vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+}
+
+.title {
     font: bold 2rem 'Montserrat', sans-serif;
     margin-bottom: 8px;
+    text-align: center;
   }
   
-.hero .hero__text {
+.hero .hero_text {
     font: normal 1.2rem 'Montserrat', sans-serif;
     text-align: center;
     margin-inline: 4rem;
     margin-bottom: 1.8rem;
-  }
+}
 
+.hero_links a {
+  color: white;
+  font: bold 1rem "Montserrat", sans-serif;
+  text-decoration: none;
+  margin: 8px;
+  padding: 5px 18px;
+  border-radius: 40px;
+  background-image: linear-gradient(to right, #8176af -2%, #C0B7E8 98%);
+  cursor: pointer;
+}
+
+.section__card{
+  width: 100%;
+  height: 70vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.project__img {
+  width: 60%;
+  height: 80%;
+  background-size: cover;
+}
+
+.card {
+  display: grid;
+  grid-template-columns: 40% 60%;
+  
+  color:  #000000;
+  font: 300 .8rem 'Poppins', sans-serif;
+  
+  border-radius: 20px;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border-style: solid;
+  border-width: 1px;
+  border-image-source: linear-gradient(to bottom, #ffffff, 0%, rgba(0, 0, 0, 0));
+  border-image-slice: 1;
+  background-image: linear-gradient(to bottom, #ffffff , #ffffff  ), linear-gradient(to bottom, #ffffff, 0%, rgba(0, 0, 0, 0));
+  background-origin: border-box;
+  background-clip: content-box, border-box;
+}
+
+.card__author{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.card__authorPhoto {
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+  background-position: center;
+  background-size: cover;
+  margin-bottom: 0.8rem;
+}
+
+.card__authorPhoto img {
+  width: 100px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* 
 .section_card {
     background-color: red;
     width: 100%;
 }
 
-.card {
-    display: grid;
-    grid-template-columns: 40% 60%;
-  
-    color:  #000000;
-    font: 300 .8rem 'Poppins', sans-serif;
-  
-    border-radius: 20px;
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
-    border-style: solid;
-    border-width: 1px;
-    border-image-source: linear-gradient(to bottom, #ffffff, 0%, rgba(0, 0, 0, 0));
-    border-image-slice: 1;
-    background-image: linear-gradient(to bottom, var(--color-white), var(--color-white)), linear-gradient(to bottom, var(--color-white) 0%, rgba(0, 0, 0, 0));
-    background-origin: border-box;
-    background-clip: content-box, border-box;
-
-}
 .card .card__projectTitle {
     grid-column: 2;
     position: relative;
@@ -78,21 +136,8 @@ body {
     background-color: var(--color-white);
   }
   
-.card .card__author {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 10px;
-  }
   
-.card .card__authorPhoto {
-    width: 75px;
-    height: 75px;
-    border-radius: 50%;
-    background-position: center;
-    background-size: cover;
-    margin-bottom: 0.8rem;
-  }
+
   
 .card .card__job {
     margin-bottom: 0.2rem;
@@ -136,7 +181,7 @@ body {
   }
 /* ICONS */
 
-.icon {
+/* .icon {
   width: 1.6rem;
   height: 1.6rem;
   color: transparent;
@@ -152,7 +197,4 @@ body {
 .icon__github {
   background-image: url('../images/icons/github.svg');
 }
-
-img {
-    width: 100px;
-}
+ */

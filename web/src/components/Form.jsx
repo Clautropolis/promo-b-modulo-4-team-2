@@ -86,7 +86,7 @@ function Form({changeData, getFileImage, dataCard, setUrlDataCard, urlDataCard, 
 
             console.log(data)
             if (data.success){
-                setUrlDataCard(data.cardURL)
+                setUrlDataCard(data.urlDataCard)
             } else {
                 setMessageError(`❌ Hubo un problema al guardar el proyecto.`); 
             }
