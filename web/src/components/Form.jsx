@@ -71,10 +71,11 @@ function Form({changeData, getFileImage, dataCard, setUrlDataCard, urlDataCard, 
             
     
     const handleSaveProject = (ev) => {
+        const apiUrl = import.meta.env.VITE_URL_SERVER;
         ev.preventDefault()
         checkValidInput()
 
-        fetch('http://localhost:5005/project/add', {
+        fetch(`${apiUrl}/project/add`, {
             body: JSON.stringify(dataCard),
             method: 'POST',
             headers: {

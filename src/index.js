@@ -10,6 +10,7 @@ const server = express();
 server.use(cors());
 server.use(express.json());
 server.set('view engine', 'ejs');
+require("dotenv").config();
 
 const proyects = [
   {
@@ -40,15 +41,16 @@ const proyects = [
 
 async function connectBD() {
   const conex = await mysql.createConnection({  //esta funcion me devuelve una promesa, por eso se le pone await 
-      host: "sql.freedb.tech",
-      user: "freedb_adminMel", 
-      password: "uZd8??B6C5g4YEM",
-      database: "freedb_firstProject2025",
+      host: process.env.HOST,
+      user: process.env.USER, 
+      password: process.env.PASSWORD,
+      database: process.env.DATABASE,
   });
   conex.connect();
   return conex;   
 }
 
+const apiUrl = process.env.URL_SERVER;
 
 //ENDPOINT
 server.get("/projects/list", async (req, res)=>{
@@ -104,7 +106,7 @@ server.post("/project/add", async(req, res) => {
 
       res.status(200).json({
       success : true,
-      urlDataCard : `http://localhost:5005/detail/${resultProject.insertId}`
+      urlDataCard : `${apiUrl}/detail/${resultProject.insertId}`
       //Aquí el servidor me devuelve una url que es la que nos lleva a la preview, pero todavia no funciona. Eso mañana.   
       });
     }
@@ -129,7 +131,7 @@ server.get('/detail/:id', async (req, res) => {
 console.log(result);
 
     if(result.length !== 0) {
-      res.render('detail', {detailProject: result[0]})
+      res.render('detail', {detailProject: result[0], url: apiUrl}) 
     } else {
       res.render('messageError')
     }
@@ -145,9 +147,9 @@ console.log(result);
 
 
 //PUERTO
-const PORT = 5005;
-server.listen(PORT, ()=>{
-  console.log(`Servidor corriendo por http://localhost:${PORT}`);
+//const PORT = 5005;
+server.listen(apiUrl, ()=>{
+  console.log(`Servidor corriendo por ${apiUrl}`);
 })
 
 //SERVIDOR ESTÁTICOS

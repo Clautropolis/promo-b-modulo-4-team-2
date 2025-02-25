@@ -1,6 +1,7 @@
 const api = () => {
+  const apiUrl = import.meta.env.VITE_URL_SERVER;
   return (
-    fetch ("http://localhost:5005/projects/list", 
+    fetch (`${apiUrl}/projects/list`, 
       {
         headers : {"content-type" : "application/json"},
         method : "GET"
