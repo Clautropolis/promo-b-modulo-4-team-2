@@ -147,8 +147,8 @@ console.log(result);
 
 
 //PUERTO
-//const PORT = 5005;
-server.listen(apiUrl, ()=>{
+const PORT = process.env.PORT || 4000;
+server.listen(PORT, ()=>{
   console.log(`Servidor corriendo por ${apiUrl}`);
 })
 
