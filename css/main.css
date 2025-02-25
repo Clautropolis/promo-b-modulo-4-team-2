@@ -197,4 +197,7 @@ body {
 .icon__github {
   background-image: url('../images/icons/github.svg');
 }
- */
+
+img {
+    width: 100px;
+}
