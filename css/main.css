@@ -1,11 +1,11 @@
 body {
     background-color: #403a5f;
     color: white;
+    min-height: 100vh
 }
 
 .hero{
   width: 100%;
-  height: 30vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -25,6 +25,18 @@ body {
     margin-bottom: 1.8rem;
 }
 
+.hero_links {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+@media  {
+  
+}
+
+
 .hero_links a {
   color: white;
   font: bold 1rem "Montserrat", sans-serif;
@@ -42,6 +54,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 30px;
 }
 
 .project__img {
@@ -90,23 +103,6 @@ body {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-/* 
-.section_card {
-    background-color: red;
-    width: 100%;
-}
-
 .card .card__projectTitle {
     grid-column: 2;
     position: relative;
@@ -114,7 +110,7 @@ body {
     text-align: center;
     text-transform: capitalize;
   
-    font: var(--font-card-section);
+    font: 300 .8rem 'Poppins', sans-serif;
   }
   
 .card .card__projectTitle::before {
@@ -126,26 +122,27 @@ body {
     right: 0;
     z-index: 0;
   
-    background-image: linear-gradient(to right, white, #232323 15%, var(--color-black), #232323 85%, white);
+    background-image: linear-gradient(to right, white, #232323 15%, #000000, #232323 85%, white);
   }
   
 .card .card__projectTitle--text {
     position: relative;
     padding-inline: 0.1em;
     z-index: 1;
-    background-color: var(--color-white);
+    background-color: #ffffff;
   }
   
   
-
+*/
   
 .card .card__job {
     margin-bottom: 0.2rem;
   }
   
 .card .card__name {
-    font: var(--font-card-title);
+    font: 500 1.2rem 'Poppins', sans-serif;
     margin-bottom: .2rem;
+    
   }
   
 .card .card__project {
@@ -153,7 +150,7 @@ body {
   }
   
 .card .card__slogan {
-    font: var(--font-card-subtitle);
+    font: 400 1.1rem 'Poppins', sans-serif;
     margin-top: -.2rem;
     margin-bottom: .8rem;
   }
@@ -167,12 +164,16 @@ body {
     display: grid;
     grid-template-columns: 1fr 2rem 2rem;
     gap: .5em;
-  
+  background-color: rebeccapurple;
     margin-block: 1.8rem;
   }
   
+.card__autor {
+
+}
+
 .card .card__technologies {
-    font: var(--font-card-tech);
+    font: 500 1rem 'Catamaran', sans-serif;
   }
 .card {
     margin-inline: 20px;
@@ -181,13 +182,13 @@ body {
   }
 /* ICONS */
 
-/* .icon {
+ .icon {
   width: 1.6rem;
   height: 1.6rem;
   color: transparent;
   cursor: pointer;
   border-radius: 50%;
-  box-shadow: 0 0 5px 0 var(--color-greyish-brown-two);
+  box-shadow: 0 0 5px 0 #575757;
 }
 
 .icon__www {

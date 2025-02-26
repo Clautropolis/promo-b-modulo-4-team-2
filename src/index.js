@@ -8,7 +8,7 @@ const server = express();
 
 //CONFIGURAR SERVIDOR 
 server.use(cors());
-server.use(express.json());
+server.use(express.json({limit: "50mb"}));
 server.set('view engine', 'ejs');
 require("dotenv").config();
 
@@ -123,10 +123,9 @@ server.post("/project/add", async(req, res) => {
 server.get('/detail/:id', async (req, res) => {
   try {
     const connection = await connectBD();
-    const sqlSelect = `SELECT * FROM Projects INNER JOIN Authors ON Projects.fk_author = Authors.idAuthor WHERE idProject = ${req.params.id}`
+    const sqlSelect = `SELECT Projects.name, Projects.slogan, Projects.repo, Projects.demo, Projects.technologies, Projects.description AS 'desc', Projects.image, Projects.fk_author, Authors.name AS autor, Authors.job, Authors.photo  FROM Projects INNER JOIN Authors ON Projects.fk_author = Authors.idAuthor WHERE idProject = ${req.params.id}`;
 
-    // const sqlSelect = "SELECT Projects.name, Projects.slogan, Projects.repo, Projects.demo, Projects.technologies, Projects.description AS `desc`, Projects.image, Projects.fk_author, Authors.name AS autor, Authors.job, Authors.photo   FROM Projects ";
-    const [result] = await connection.query(sqlSelect)
+    const [result] = await connection.query(sqlSelect);
     connection.end();
 console.log(result);
 
