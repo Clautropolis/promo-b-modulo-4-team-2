@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
     <section class="hero">
@@ -18,35 +19,34 @@
 
     <section class="section__card">
 
-        <div class="project__img" style="background-image: url(<%= detailProject.image %>)">
+        <div class="project__img">
+            <img class="project__img2" src="<%= detailProject.image %>" alt="">
         </div>
-
 
         <article class="card">
             <div class="card__author">
-            <div class="card__authorPhoto" style="background-image: url(<%= detailProject.photo %>)"></div>
-            <p class="card__job">
-                <%= detailProject.job %>
-            </p>
-            <h3 class="card__autor"><%= detailProject.autor %></h3> 
+                <div class="card__authorPhoto" style="background-image: url(<%= detailProject.photo %>)"></div>
+                <p class="card__job">
+                    <%= detailProject.job %>
+                </p>
+                <h3 class="card__autor"><%= detailProject.autor %></h3> 
             </div>
         
             <div class="card__project">            
-            <h3 class="card__name"><%= detailProject.name %></h3>
-            <p class="card__slogan"><%= detailProject.slogan %></p>
-            
-            <p class="card__description"><%= detailProject.desc %></p>
+                <h3 class="card__name"><%= detailProject.name %></h3>
+                <p class="card__slogan"><%= detailProject.slogan %></p>
+                
+                <p class="card__description"><%= detailProject.desc %></p>
 
-            <div class="card__technicalInfo">
-                <p class="card__technologies"><%= detailProject.technologies %></p>
-            
-                <a class="icon icon__www" href= '<%= detailProject.demo %>' title="Haz click para ver el proyecto online" target='_blank'>
-                Web link
-                </a>
-                <a class="icon icon__github" href=<%= detailProject.repo %> title="Haz click para ver el código del proyecto" target='_blank'>
-                GitHub link
-                </a>
-            </div>
+                <div class="card__technicalInfo">
+                    <p class="card__technologies"><%= detailProject.technologies %></p>
+                
+                    <a class="icon icon__www" href= '<%= detailProject.demo %>' title="Haz click para ver el proyecto online" target='_blank'><i class="icon fa-solid fa-earth-americas"></i>
+                    </a>
+                    <a class="icon icon__github" href='<%= detailProject.repo %>' title="Haz click para ver el código del proyecto" target='_blank'>
+                        <i class="icon fa-brands fa-github"></i>
+                    </a>
+                </div>
             </div>
     </article>
 
